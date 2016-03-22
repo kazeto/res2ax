@@ -8,20 +8,21 @@ OUTPUT = '%s/wn.derivation.lisp' % sys.argv[1]
 
 
 CONVENTION = {
-    'NN_ADJ'   : ['(=> ($W1 x) (^ ($W2 e) (mod e x)) :derivation)'],
-    'ADJ_NN_1' : ['(=> ($W1 e) (^ ($W2 e.n) (mod e e.n)) :derivation)'],
-    'ADJ_NN_2' : ['(=> ($W1 e) ($W2 e) :derivation)'],
-    'VB_ADJ_1' : ['(=> (^ ($W1 e) (agt e x)) ($W2 x) :derivation)'],
-    'VB_ADJ_2' : ['(=> (^ ($W1 e) (obj e y)) ($W2 y) :derivation)'],
-    'VB_ADJ_3' : ['(=> ($W1 e) ($W2 e.dr) :derivation)'],
-    'VB_ADJ'   : ['(=> (^ ($W1 e1) (agt x)) (^ ($W2 e2) (mod x)) :derivation)',
-                  '(=> (^ ($W1 e1) (obj y)) (^ ($W2 e2) (mod y)) :derivation)'],
-    'VB_NN_EVN' : ['(=> ($W1 e1) ($W2 e1) :derivation)'],
-    'VB_NN_AGT' : ['(=> (^ ($W1 e) (agt x)) ($W2 x) :derivation)'],
-    'VB_NN_OBJ' : ['(=> (^ ($W1 e) (obj y)) ($W2 y) :derivation)'],
-    'NN_VB' : ['(=> ($W1 x) ($W2 e) :derivation)'],
-    'NN_NN' : ['(=> ($W1 x) ($W2 y) :derivation)'],
-    'NN_NN_2' : ['(=> ($W1 x) ($W2 y) :derivation)']}
+    'NN_ADJ'   : ['(=> ($W1 x) (^ ($W2 e) (nsubj e x)) :deriv)'],
+    'ADJ_NN_1' : ['(=> ($W1 e) (^ ($W2 e.n) (nsubj e e.n)) :deriv)'],
+    'ADJ_NN_2' : ['(=> ($W1 e) ($W2 e) :deriv)'],
+    'VB_ADJ_1' : ['(=> (^ ($W1 e) (nsubj e x)) ($W2 x) :deriv)'],
+    'VB_ADJ_2' : ['(=> (^ ($W1 e) (dobj e y)) ($W2 y) :deriv)'],
+    # 'VB_ADJ_3' : ['(=> ($W1 e) ($W2 e.dr) :deriv)'],
+    'VB_ADJ'   : ['(=> (^ ($W1 e1) (nsubj x)) (^ ($W2 e2) (nsubj x)) :deriv)',
+                  '(=> (^ ($W1 e1) (dobj y)) (^ ($W2 e2) (nsubj y)) :deriv)'],
+    'VB_NN_EVN' : ['(=> ($W1 e1) ($W2 e1) :deriv)'],
+    'VB_NN_AGT' : ['(=> (^ ($W1 e) (nsubj x)) ($W2 x) :deriv)'],
+    'VB_NN_OBJ' : ['(=> (^ ($W1 e) (dobj y)) ($W2 y) :deriv)'],
+    # 'NN_VB' : ['(=> ($W1 x) ($W2 e) :deriv)'],
+    # 'NN_NN' : ['(=> ($W1 x) ($W2 y) :deriv)'],
+    # 'NN_NN_2' : ['(=> ($W1 x) ($W2 y) :deriv)']
+    }
 
 
 def formatWord(w):

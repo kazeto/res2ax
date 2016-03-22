@@ -8,40 +8,40 @@ CN_FILES = sys.argv[1:-1]
 OUTPUT_DIR = sys.argv[-1]
 
 CONVENTIONS = {
-    'Antonym|nn|nn' : '(xor ($W1 x) ($W2 x))',
+    'Antonym|nn|nn' : '(xor ($W1 e1 x) ($W2 e2 x))',
     'Antonym|vb|vb' : '(xor ($W1 e) ($W2 e))',
-    'Antonym|jj|jj' : '(xor ($W1 e) ($W2 e))',
-    'Antonym|rb|rb' : '(xor ($W1 e) ($W2 e))',
-    'NotIsA|nn|nn' : '(xor ($W1 x) ($W2 x))',
+    'Antonym|jj|jj' : '(xor ($W1 e1 x) ($W2 e2 x))',
+    'Antonym|rb|rb' : '(xor ($W1 e1 x) ($W2 e2 x))',
+    'NotIsA|nn|nn' : '(xor ($W1 e1 x) ($W2 e2 x))',
     'NotIsA|vb|vb' : '(xor ($W1 e) ($W2 e))',
-    'NotIsA|jj|jj' : '(xor ($W1 e) ($W2 e))',
-    'NotIsA|rb|rb' : '(xor ($W1 e) ($W2 e))',
-    'AtLocation|nn|nn' : '(=> ($W1 x) (^ ($W2 y) (in-prep d x y)))',
-    'HasPrerequisite|nn|nn' : '(=> ($W1 x) ($W2 y))',
-    'HasPrerequisite|vb|nn' : '(=> ($W1 e1) (^ ($W2 x) (own-vb e2) (dobj d e2 x)))',
-    'HasPrerequisite|vb|vb' : '(=> (^ ($W1 e1) (nsubj d1 e1 x)) (^ ($W2 e2) (nsubj d2 e2 x)))',
-    'HasProperty|nn|nn' : '(=> ($W1 e1 x1) ($W2 e2 x2))',
-    'HasProperty|vb|nn' : '(=> ($W1 e1 x1 x2) ($W2 e2 x3))',
-    'HasProperty|vb|vb' : '(=> ($W1 e1 x y) ($W2 e2 x y))',
-    'IsA|nn|nn' : '(=> ($W1 x) ($W2 x))',
+    'NotIsA|jj|jj' : '(xor ($W1 e1 x) ($W2 e2 x))',
+    'NotIsA|rb|rb' : '(xor ($W1 e1 x) ($W2 e2 x))',
+    'AtLocation|nn|nn' : '(=> ($W1 e1 x) (^ ($W2 e2 y) (prep_in x y)))',
+    'HasPrerequisite|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 y))',
+    'HasPrerequisite|vb|nn' : '(=> ($W1 e1) (^ ($W2 e2 x) (own-vb e3) (dobj e3 x)))',
+    'HasPrerequisite|vb|vb' : '(=> (^ ($W1 e1) (nsubj e1 x)) (^ ($W2 e2) (nsubj e2 x)))',
+    'HasProperty|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 x))',
+    'HasProperty|vb|nn' : '(=> ($W1 e1) ($W2 e2 x3))',
+    'HasProperty|vb|vb' : '(=> (^ ($W1 e1) (nsubj e1 x)) (^ ($W2 e2) (nsubj e2 x)))',
+    'IsA|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 x))',
     'IsA|vb|vb' : '(=> ($W1 e) ($W2 e))',
-    'HasA|nn|nn' : '(=> ($W1 x1) (^ ($W2 x2) (own-vb e) (nsubj d1 e x1) (dobj d2 e x2)))',
+    'HasA|nn|nn' : '(=> ($W1 e1 x1) (^ ($W2 e2 x2) (own-vb e3) (nsubj e3 x1) (dobj e3 x2)))',
     'LocatedNear|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 y))',
-    'LocatedNear|nn|vb' : '(=> ($W1 e1 x) ($W2 e2 y z))',
+    'LocatedNear|nn|vb' : '(=> ($W1 e1 x) (^ ($W2 e2)))',
     'LocatedNear|vb|vb' : '(=> ($W1 e1 x1 y1) ($W2 e2 x2 y2))',
-    'PartOf|nn|nn' : '(=> ($W1 e1 x1) (^ ($W2 e2 x2) (own-vb e3 x2 x1)))',
+    'PartOf|nn|nn' : '(=> ($W1 e1 x1) (^ ($W2 e2 x2) (own-vb e3) (nsubj e3 x2) (dobj e3 x1)))',
     'RelatedTo|nn|nn' : '(=> ($W1 e1 x1) ($W2 e2 x2))',
     'RelatedTo|nn|jj' : '(=> ($W1 e1 x1) ($W2 e2 x2))',
     'RelatedTo|vb|nn' : '(=> ($W1 e1 x1 x2) ($W2 e2 x3))',
     'RelatedTo|vb|jj' : '(=> ($W1 e1 x1 x2) ($W2 e2 x3))',
     'RelatedTo|jj|jj' : '(=> ($W1 e1 x1) ($W2 e2 x2))',
-    'Synonym|nn|nn' : '(=> ($W1 e x) ($W2 e x))',
-    'Synonym|vb|vb' : '(=> ($W1 e x y) ($W2 e x y))',
+    'Synonym|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 x))',
+    'Synonym|vb|vb' : '(=> ($W1 e) ($W2 e))',
     'Synonym|jj|jj' : '(=> ($W1 e x) ($W2 e x))',
     'Synonym|rb|rb' : '(=> ($W1 e x) ($W2 e x))',
-    'SimilarTo|vb|vb' : '(=> ($W1 e x y) ($W2 e x y))',
-    'SimilarTo|jj|jj' : '(=> ($W1 e x) ($W2 e x))',
-    'Causes|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 y))',
+    'SimilarTo|vb|vb' : '(=> ($W1 e) ($W2 e))',
+    'SimilarTo|jj|jj' : '(=> ($W1 e1 x) ($W2 e2 x))',
+    'Causes|nn|nn' : '(=> (^ ($W1 e1 x) (cause-vb e2) (nsubj e2 x) (dobj e2 y)) ($W2 e3 y))',
     'Causes|vb|nn' : '(=> ($W1 e1 x y) ($W2 e2 z))',
     'Causes|vb|vb' : '(=> ($W1 e1 x y) ($W2 e2 x y))',
     'InstanceOf|nn|nn' : '(=> ($W1 e1 x) ($W2 e2 x))'}
@@ -122,8 +122,10 @@ def main():
                 rel = splitted[1].split('/')[2]
                 ent1 = Entity(splitted[2])
                 ent2 = Entity(splitted[3])
+                weight = float(splitted[5])
+                res = splitted[8].split('/')[2]
 
-                if ent1.good() and ent2.good():
+                if ent1.good() and ent2.good() and res != 'wordnet':
                     process(ent1, ent2, rel)
 
                 processed += 1

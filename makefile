@@ -9,6 +9,8 @@ wn:
 	python bin/wn.hypernym.py $(DIR_WN)
 	python bin/wn.antonym.py $(DIR_WN)
 	python bin/wn.multiword.py $(DIR_WN)
+	python bin/wn.lemma.synonym.py $(DIR_WN)
+	python bin/wn.lemma.hypernym.py $(DIR_WN)
 	python bin/wn.derivation.py $(DIR_WN)
 	python bin/wn.deriv2axiom.py $(DIR_WN)
 
